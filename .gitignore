@@ -1,8 +1,12 @@
 # Generated files
-env.sh
-o-optimize
-o-debug
+/env.sh
+/o-optimize
+/o-debug
 
 # Misc
-zubax_rtems
+/zubax_rtems
 
+# IDE
+.project
+.cproject
+.settings
