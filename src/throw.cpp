@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <rtems/shell.h>
 
 #if !defined(BSP_SMALL_MEMORY)
 #define RTEMS_TEST_IO_STREAM
@@ -44,7 +45,7 @@ public:
   * Make sure we use some space
   */
 
-        string = new char[2048];
+        string = new char[50];
  sprintf(string, "Instantiation order %d", num_inst);
     };
 
@@ -131,6 +132,10 @@ void* POSIX_Init(void*)
 {
     printf( "\n\n*** CONSTRUCTOR/DESTRUCTOR TEST ***\n" );
 
+    auto ret = rtems_shell_init("SHLL", 4096, 100, "/dev/console", true, false, NULL);
+
+    printf("RTEMS SHELL init ret: %d\n", int(ret));
+
     ::sleep(1);
     printf("Work area size: %d\n", rtems_configuration_get_work_space_size());
     ::sleep(1);
@@ -143,5 +148,10 @@ void* POSIX_Init(void*)
 
     printf( "*** END OF CONSTRUCTOR/DESTRUCTOR TEST ***\n\n\n" );
 
-    exit(0);
+    for (;;)
+    {
+        ::sleep(1);
+    }
+
+    return NULL;
 }
