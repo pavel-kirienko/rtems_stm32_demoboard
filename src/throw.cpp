@@ -128,7 +128,7 @@ void* POSIX_Init(void*)
 {
     printf( "\n\n*** CONSTRUCTOR/DESTRUCTOR TEST ***\n" );
 
-    auto ret = rtems_shell_init("SHLL", 4096, 100, "/dev/console", true, false, NULL);
+    auto ret = rtems_shell_init("SHLL", 4096, 254, "/dev/console", true, false, NULL);
 
     printf("RTEMS SHELL init ret: %d\n", int(ret));
 
