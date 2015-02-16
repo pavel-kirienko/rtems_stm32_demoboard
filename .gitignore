@@ -6,7 +6,8 @@
 # Misc
 /zubax_rtems
 
-# IDE
+# IDE/debug
 .project
 .cproject
 .settings
+.gdbinit

@@ -5,7 +5,7 @@
 
 SRC_DIR := src
 
-AM_CFLAGS = -Wno-error=format -Wno-error=pedantic
-AM_CXXFLAGS = $(AM_CFLAGS)
+AM_CFLAGS := -Wno-error=format -Wno-error=pedantic
+AM_CXXFLAGS := $(AM_CFLAGS)
 
 include zubax_rtems/application.mk

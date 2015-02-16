@@ -125,16 +125,8 @@ cdtest(void)
 #endif
 
 
-
-extern "C" {
-  rtems_task Init(
-    rtems_task_argument arg
-  );
-};
-
-rtems_task Init(
-  rtems_task_argument
-)
+extern "C"
+void* POSIX_Init(void*)
 {
     printf( "\n\n*** CONSTRUCTOR/DESTRUCTOR TEST ***\n" );
 
@@ -146,24 +138,3 @@ rtems_task Init(
 
     exit(0);
 }
-
-/* configuration information */
-
-#include <bsp.h>
-
-#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
-#define CONFIGURE_APPLICATION_DOES_NOT_NEED_CLOCK_DRIVER
-
-#define CONFIGURE_RTEMS_INIT_TASKS_TABLE
-
-#define CONFIGURE_MAXIMUM_TASKS 1
-/*
- * GCC C++ support requires Classic Semaphores but this could change to 
- * POSIX mutexes at some point in the future. When that happens, this will
- * need to change.
- */
-#define CONFIGURE_MAXIMUM_SEMAPHORES 1
-
-#define CONFIGURE_INIT
-
-#include <rtems/confdefs.h>
