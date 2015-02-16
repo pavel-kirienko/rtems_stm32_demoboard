@@ -28,6 +28,8 @@ export STM32F4_ENABLE_USART_6=""
 # I2C
 export STM32F4_ENABLE_I2C1=""
 export STM32F4_ENABLE_I2C2=""
+# General BSP options
+export BSP_PRINT_EXCEPTION_CONTEXT="1"
 
 #
 # Building RTEMS if necessary
