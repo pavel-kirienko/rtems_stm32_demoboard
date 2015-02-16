@@ -24,10 +24,6 @@
 #if !defined(BSP_SMALL_MEMORY)
 #define RTEMS_TEST_IO_STREAM
 
-extern "C" {
-  extern rtems_task main_task(rtems_task_argument);
-}
-
 static int num_inst = 0;
 
 class A {
