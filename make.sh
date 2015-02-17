@@ -36,7 +36,7 @@ export BSP_PRINT_EXCEPTION_CONTEXT="1"
 #
 cd $(dirname $(readlink -f $0))
 
-# See TinyRTEMS: https://devel.rtems.org/wiki/Developer/Projects/Open/TinyRTEMS
+# See TinyRTEMS: https://devel.rtems.org/wiki/Projects/TinyRTEMS
 export RTEMS_CONFIGURE_EXTRA_OPTIONS="\
 --disable-itron --disable-networking --disable-multiprocessing \
 USE_TICKS_FOR_CPU_USAGE_STATISTICS=1 USE_TICKS_FOR_RATE_MONOTONIC_STATISTICS=1 \
