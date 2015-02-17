@@ -99,7 +99,7 @@ public:
 A foo;
 B foobar;
 
-void
+static void
 cdtest(void)
 {
     A bar, blech, blah;
@@ -124,6 +124,8 @@ cdtest(void)
 
 
 extern "C"
+void* POSIX_Init(void*);
+
 void* POSIX_Init(void*)
 {
     printf( "\n\n*** CONSTRUCTOR/DESTRUCTOR TEST ***\n" );
