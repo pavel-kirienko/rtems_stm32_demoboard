@@ -3,11 +3,31 @@
 # Distributed under the terms of the MIT license.
 #
 
-SRC_DIR := src
+#
+# Source files
+#
+CSRCS = $(wildcard src/*.c)        \
+        $(wildcard src/*/*.c)      \
+        $(wildcard src/*/*/*.c)
 
-AM_CFLAGS := -Werror -Wno-error=format -Wno-error=pedantic -flto
-AM_CXXFLAGS := $(AM_CFLAGS) -fno-exceptions -fno-rtti
+CXXSRCS = $(wildcard src/*.cpp)        \
+          $(wildcard src/*/*.cpp)      \
+          $(wildcard src/*/*/*.cpp)
 
-AM_LDFLAGS := -fno-exceptions -fno-rtti -Os -flto
+#
+# Flags
+#
+common_flags := -Wall -Wextra -Werror -pedantic -Wundef -Wfloat-equal -Wmissing-declarations \
+                -Wno-error=format -Wno-error=pedantic \
+                -ffunction-sections -fdata-sections -flto
 
+AM_CFLAGS   := $(common_flags) -std=c99
+
+AM_CXXFLAGS := $(common_flags) -std=c++11 -fno-exceptions -fno-rtti
+
+AM_LDFLAGS  := -fno-exceptions -fno-rtti -Os -flto -Wl,--gc-sections
+
+#
+# Include the standard application makefile
+#
 include zubax_rtems/application.mk
