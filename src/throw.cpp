@@ -13,8 +13,35 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <chrono>
+#include <sched.h>
 #include <string>
 
+namespace std
+{
+    typedef ::pthread_t __gthread_t;
+
+    typedef ::timespec __gthread_time_t;
+
+    inline bool __gthread_equal(const __gthread_t& a, const __gthread_t& b)
+    {
+        return a == b;
+    }
+
+    inline __gthread_t __gthread_self()
+    {
+        return ::pthread_self();
+    }
+
+    inline void __gthread_yield()
+    {
+        (void)::sched_yield();
+    }
+}
+
+#include <thread>
+#include <mutex>
+
+std::mutex stdout_lock;
 
 static std::string systime2str(const std::chrono::system_clock::time_point& tp)
 {
@@ -44,6 +71,7 @@ static void* tls_check(void* arg)
     {
         ::sleep(1);
         tls_var += inc;
+        std::lock_guard<std::mutex> lock(stdout_lock);
         printf("%d: tls_var == %d\n", inc, tls_var);
     }
     return nullptr;
@@ -70,6 +98,8 @@ void* POSIX_Init(void*)
     for (;;)
     {
         ::sleep(1);
+
+        std::lock_guard<std::mutex> lock(stdout_lock);
 
         printf("system clock:    %s\n", systime2str(std::chrono::system_clock::now()).c_str());
         printf("monotonic clock: %s   %s\n",

@@ -19,7 +19,7 @@ CXXSRCS = $(wildcard src/*.cpp)        \
 #
 common_flags := -Wall -Wextra -Werror -pedantic -Wundef -Wfloat-equal -Wmissing-declarations \
                 -Wno-error=format -Wno-error=pedantic \
-                -ffunction-sections -fdata-sections
+                -ffunction-sections -fdata-sections -D_GLIBCXX_HAS_GTHREADS
 
 AM_CFLAGS   := $(common_flags) -std=c99
 
