@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <rtems/shell.h>
 #include <sys/time.h>
+#include <pthread.h>
 #include <chrono>
 #include <string>
 
@@ -32,6 +33,22 @@ static std::string nanoseconds2str(long long nanos)
     return buf;
 }
 
+static void* tls_check(void* arg)
+{
+    const int inc = reinterpret_cast<int>(arg);
+    static thread_local int tls_var = 0;
+
+    printf("&tls_var == %p\n", (void*)&tls_var);
+
+    for (;;)
+    {
+        ::sleep(1);
+        tls_var += inc;
+        printf("%d: tls_var == %d\n", inc, tls_var);
+    }
+    return nullptr;
+}
+
 extern "C" void* POSIX_Init(void*);
 
 void* POSIX_Init(void*)
@@ -44,6 +61,11 @@ void* POSIX_Init(void*)
 
     printf("Work area size: %d\n", rtems_configuration_get_work_space_size());
     printf("Tick interval : %d\n", rtems_configuration_get_microseconds_per_tick());
+
+    auto thread_a = ::pthread_t();
+    auto thread_b = ::pthread_t();
+    (void)pthread_create(&thread_a, nullptr, tls_check, reinterpret_cast<void*>(1));
+    (void)pthread_create(&thread_b, nullptr, tls_check, reinterpret_cast<void*>(-1));
 
     for (;;)
     {
