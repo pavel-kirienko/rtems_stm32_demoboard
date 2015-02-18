@@ -47,7 +47,6 @@ if ! [ -f env.sh ]; then
                                --bsp=stm32f105rc                                     \
                                --amend-bsp-dir=$(dirname $(readlink -f $0))/stm32f4  \
                                --remove-unused-bsp                                   \
-                               --optimize-for-size                                   \
         || exit 1
     cp -f zubax_rtems/env.sh .
 fi

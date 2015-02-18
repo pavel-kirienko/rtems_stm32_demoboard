@@ -19,13 +19,13 @@ CXXSRCS = $(wildcard src/*.cpp)        \
 #
 common_flags := -Wall -Wextra -Werror -pedantic -Wundef -Wfloat-equal -Wmissing-declarations \
                 -Wno-error=format -Wno-error=pedantic \
-                -ffunction-sections -fdata-sections -flto
+                -ffunction-sections -fdata-sections
 
 AM_CFLAGS   := $(common_flags) -std=c99
 
 AM_CXXFLAGS := $(common_flags) -std=c++11 -fno-exceptions -fno-rtti
 
-AM_LDFLAGS  := -fno-exceptions -fno-rtti -Os -flto -Wl,--gc-sections
+AM_LDFLAGS  := -fno-exceptions -fno-rtti -Os -Wl,--gc-sections
 
 #
 # Include the standard application makefile
