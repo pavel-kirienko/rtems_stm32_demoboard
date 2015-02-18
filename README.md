@@ -1,5 +1,11 @@
-# rtems_stm32_demoboard
+# Basic RTEMS application on STM32
 
-Experimenting with RTEMS on STM32 demoboards.
+This application is intended to run on a [TE-STM32F107 demoboard](https://www.terraelectronica.ru/catalog_info.php?CODE=1023380).
 
-Don't forget to clone https://github.com/Zubax/zubax_rtems.
+## Building
+
+```bash
+cd rtems_stm32_demoboard
+git clone https://github.com/Zubax/zubax_rtems
+./make.sh
+```
