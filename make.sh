@@ -38,9 +38,14 @@ cd $(dirname $(readlink -f $0))
 
 # See TinyRTEMS: https://devel.rtems.org/wiki/Projects/TinyRTEMS
 export RTEMS_CONFIGURE_EXTRA_OPTIONS="\
---disable-itron --disable-networking --disable-multiprocessing \
-USE_TICKS_FOR_CPU_USAGE_STATISTICS=1 USE_TICKS_FOR_RATE_MONOTONIC_STATISTICS=1 \
+--disable-itron \
+--disable-networking \
+--disable-multiprocessing \
+USE_TICKS_FOR_STATISTICS=1 \
+CXXFLAGS_FOR_TARGET=-fno-exceptions \
 "
+
+export RTEMS_RSB_EXTRA_OPTIONS="--targetcxxflags=-fno-exceptions --libstdcxxflags=-fno-exceptions"
 
 if ! [ -f env.sh ]; then
     zubax_rtems/build_rtems.sh --cpu=arm                                             \
