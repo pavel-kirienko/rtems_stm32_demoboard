@@ -62,6 +62,7 @@ static std::string nanoseconds2str(long long nanos)
 
 static void* tls_check(void* arg)
 {
+    (void)tls_check;
     const int inc = reinterpret_cast<int>(arg);
     static thread_local int tls_var = 0;
 
@@ -90,14 +91,15 @@ void* POSIX_Init(void*)
     printf("Work area size: %d\n", rtems_configuration_get_work_space_size());
     printf("Tick interval : %d\n", rtems_configuration_get_microseconds_per_tick());
 
-    auto thread_a = ::pthread_t();
-    auto thread_b = ::pthread_t();
-    (void)pthread_create(&thread_a, nullptr, tls_check, reinterpret_cast<void*>(1));
-    (void)pthread_create(&thread_b, nullptr, tls_check, reinterpret_cast<void*>(-1));
+//    auto thread_a = ::pthread_t();
+//    auto thread_b = ::pthread_t();
+//    (void)pthread_create(&thread_a, nullptr, tls_check, reinterpret_cast<void*>(1));
+//    (void)pthread_create(&thread_b, nullptr, tls_check, reinterpret_cast<void*>(-1));
 
     for (;;)
     {
         ::sleep(1);
+        continue;
 
         std::lock_guard<std::mutex> lock(stdout_lock);
 
