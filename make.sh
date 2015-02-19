@@ -6,6 +6,8 @@
 # Also see this:
 #     https://devel.rtems.org/wiki/TBR/BSP/STM32_F4
 #     https://devel.rtems.org/wiki/TBR/BSP/STM32F105
+#     https://devel.rtems.org/wiki/Projects/TinyRTEMS
+#     http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4049.pdf
 #
 
 #
@@ -36,7 +38,6 @@ export BSP_PRINT_EXCEPTION_CONTEXT="1"
 #
 cd $(dirname $(readlink -f $0))
 
-# See TinyRTEMS: https://devel.rtems.org/wiki/Projects/TinyRTEMS
 export RTEMS_CONFIGURE_EXTRA_OPTIONS="\
 --disable-itron \
 --disable-networking \
